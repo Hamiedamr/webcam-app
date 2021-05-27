@@ -34,10 +34,11 @@ def parse_request():
     else:
         file = data_uri_to_cv2_img(request.form['data'])
     if len(file) and request.form['f'] == 'emotion':
-        _,__,out_emotion = emotions.detect(file)
-        success = True
-        if success and len(out_emotion) > 0:
-            return json.dumps({'message':out_emotion[0]})
+        # _,__,out_emotion = emotions.detect(file)
+        # success = True
+        # if success and len(out_emotion) > 0:
+            # return json.dumps({'message':out_emotion[0]})
+        pass
     if len(file) and request.form['f'] == 'gender':
         _,_,out_gender = genders.detect(file)
         success = True

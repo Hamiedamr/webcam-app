@@ -8,7 +8,7 @@ from tensorflow.keras.layers import GlobalAveragePooling2D
 from tensorflow.keras import Model
 from tensorflow.keras.regularizers import l2
 from face_detection import FaceDetectorSSD
-from face_alignment import FaceAlignment
+# from face_alignment import FaceAlignment
 
 class XceptionModel():
     '''
@@ -22,7 +22,7 @@ class XceptionModel():
             self.model= None
         
         self.face_detector = FaceDetectorSSD()
-        self.alignment= FaceAlignment()
+        # self.alignment= FaceAlignment()
     
     def __xception_block(self,input_tensor, num_kernels, l2_reg=0.01):
         #  params
@@ -120,7 +120,7 @@ class XceptionModel():
         out= list()
         for face in faces:
             (x,y,w,h) = face['box']
-            face = self.alignment.frontalize_face(face['box'],image)
+            # face = self.alignment.frontalize_face(face['box'],image)
 
             if type(face) ==type(None):
                 continue
