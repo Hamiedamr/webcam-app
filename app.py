@@ -55,4 +55,4 @@ def parse_request():
         return json.dumps({'errors':'Error!','status_code':400,'ContentType':'application/json'})
 
 if __name__ == "__main__":
-    app.run(ssl_context='adhoc',host="0.0.0.0",debug=True)
+    app.run(host="0.0.0.0",debug=True)
