@@ -3,5 +3,5 @@ numpy==1.19.2
 opencv-python
 Flask
 cmake
-dlib
+
 
