@@ -1,5 +1,5 @@
 flask
 tensorflow
-opencv-python
+opencv-python==3.4.14.51
 cmake
 dlib
