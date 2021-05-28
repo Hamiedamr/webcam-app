@@ -238,7 +238,7 @@ class GenderRecognition(AgeGenderClassification):
 
 
 class AgeDetector():
-    def __init__(self,pretrained_path="pretrained_models/DEX_age.hdf5",margin=0.26):
+    def __init__(self,pretrained_path="./pretrained_models/DEX_age.hdf5",margin=0.26):
         self.model = tf.keras.models.load_model(pretrained_path)
 
         self.face_detector = FaceDetectorSSD()
