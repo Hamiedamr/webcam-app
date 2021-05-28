@@ -8,7 +8,7 @@ from tensorflow.keras.layers import GlobalAveragePooling2D
 from tensorflow.keras import Model
 from tensorflow.keras.regularizers import l2
 from face_detection import FaceDetectorSSD
-# from face_alignment import FaceAlignment
+from face_alignment import FaceAlignment
 
 class XceptionModel():
     '''

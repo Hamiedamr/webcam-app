@@ -1,3 +1,5 @@
 flask
 tensorflow
 opencv-python
+cmake
+dlib
