@@ -168,13 +168,16 @@ class EmotionRecognition(XceptionModel):
         super(EmotionRecognition,self).__init__(pretrained_path)
     
     def get_labels(self):
-        return ('غاضب', 'مقزز', 'خائف', 'سعيد','حزين', 'مندهش', 'طبيعي')
+        return ('Angry', 'Disgust', 'Fear', 'Happy','Sad', 'Surprise', 'Neutral')
 
 
 
 
 
 class AgeGenderClassification():
+    '''
+        Age Classification Class based on caffee model
+    '''
     def __init__(self,dir="",prototxt="",model="",margin=None):
         self.prototxt = os.path.join(dir,prototxt)
         self.model = os.path.join(dir,model)
@@ -198,7 +201,7 @@ class AgeGenderClassification():
         
 
         for face in faces:
-            x1,y1,w,h= faces[0]['box']
+            x1,y1,w,h= face['box']
             x2,y2 = x1+w+1, y1+h+1
             xw1 = max(int(x1 - margin * w), 0)
             yw1 = max(int(y1 - margin * h), 0)
@@ -233,11 +236,14 @@ class GenderRecognition(AgeGenderClassification):
         super(GenderRecognition,self).__init__(dir,prototxt,model,margin)
     
     def get_labels(self):
-        return ['ذَكَرٌ', 'أنثى']
+        return ['Male', 'Female']
     
 
 
 class AgeDetector():
+    '''
+        Age estimation class based on DEX model
+    '''
     def __init__(self,pretrained_path="pretrained_models/DEX_age.hdf5",margin=0.26):
         self.model = tf.keras.models.load_model(pretrained_path)
 
@@ -247,6 +253,19 @@ class AgeDetector():
 
     
     def detect(self, image,draw=False):
+        '''
+            input:
+                image: the image to detect the age from it
+                draw: flag, if true the output is drawn on the image else image won't change
+            output:
+                takes the image and then
+                    - First extracts the faces using FaceDetectorSSD
+                    - Then, for each face detect the age
+                    - Return 
+                        -- image
+                        -- faces: list of each face detected
+                        -- features: list of each face's feature given from the model
+        '''
         faces = self.face_detector.detect(image)
 
         img = np.copy(image)
@@ -259,7 +278,7 @@ class AgeDetector():
         
 
         for face in faces:
-            x1,y1,w,h= faces[0]['box']
+            x1,y1,w,h= face['box']
             x2,y2 = x1+w+1, y1+h+1
             xw1 = max(int(x1 - margin * w), 0)
             yw1 = max(int(y1 - margin * h), 0)
